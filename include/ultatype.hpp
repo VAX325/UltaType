@@ -3,7 +3,7 @@
 - File: ultatype.hpp
 - Author: Vadim "VAX325"
 - Creation date: 26.05.2023 / 15:10
-- Last edit date: 27.05.2023 / 14:34
+- Last edit date: 14.07.2023 / 14:08
 - Description: UltaType is wrapper class for
   storing almost any type of data.
 - MIT Licensed. (See LICENSE for more info)
@@ -11,8 +11,8 @@
 */
 
 #pragma once
-#ifndef ULTATYPE_H
-#define ULTATYPE_H
+#ifndef ULTATYPE_HPP
+#define ULTATYPE_HPP
 
 #include <memory>
 #include <typeinfo>
@@ -73,7 +73,7 @@ namespace ULT
 		typeid(x).hash_code(), (int)y                                                                                  \
 	}
 
-		std::map<size_t, int> g_TypesIdentify = {
+		static std::map<size_t, int> g_TypesIdentify = {
 			__ULTATYPE_TYPE_ID_DEFINE(char, BaseTypes_t::TYPE_CHAR),
 			__ULTATYPE_TYPE_ID_DEFINE(short, BaseTypes_t::TYPE_SHORT),
 			__ULTATYPE_TYPE_ID_DEFINE(int, BaseTypes_t::TYPE_INT),
@@ -168,7 +168,7 @@ namespace ULT
 		}
 
 		using Converter_t = void (*)(const void* src, const void* dst);
-		std::map<std::tuple<size_t, size_t>, Converter_t> g_UTConverters = {
+		static std::map<std::tuple<size_t, size_t>, Converter_t> g_UTConverters = {
 			__ULTATYPE_BASE_CONVERTER_DEFINE_BUNCH(char),
 			__ULTATYPE_BASE_CONVERTER_DEFINE_BUNCH(short),
 			__ULTATYPE_BASE_CONVERTER_DEFINE_BUNCH(int),
@@ -251,7 +251,7 @@ namespace ULT
 		__ULTATYPE_BASE_COMPARER_DEFINE(x, long double)
 
 		using Comparer_t = const char (*)(const void* a, const void* b);
-		std::map<std::tuple<size_t, size_t>, Comparer_t> g_UTComparers = {
+		static std::map<std::tuple<size_t, size_t>, Comparer_t> g_UTComparers = {
 			__ULTATYPE_BASE_COMPARER_DEFINE_BUNCH(char),
 			__ULTATYPE_BASE_COMPARER_DEFINE_BUNCH(short),
 			__ULTATYPE_BASE_COMPARER_DEFINE_BUNCH(int),
@@ -332,7 +332,7 @@ namespace ULT
 		__ULTATYPE_BASE_OPERATOR_DEFINE(x, float), __ULTATYPE_BASE_OPERATOR_DEFINE(x, double),                         \
 		__ULTATYPE_BASE_OPERATOR_DEFINE(x, long double)
 
-		std::map<std::tuple<size_t, size_t>, AbstractOperator_t*> g_Operators = {
+		static std::map<std::tuple<size_t, size_t>, AbstractOperator_t*> g_Operators = {
 			__ULTATYPE_BASE_OPERATOR_DEFINE_BUNCH(char),
 			__ULTATYPE_BASE_OPERATOR_DEFINE_BUNCH(short),
 			__ULTATYPE_BASE_OPERATOR_DEFINE_BUNCH(int),
